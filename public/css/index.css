@@ -1,0 +1,82 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    background-color: #fff;
+    height: 83px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+header form{
+    width: 70%;
+}
+
+header section{
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+}
+
+main{
+    display: flex;
+    border: solid 1px yellow;
+    margin: 0;
+    height: 85vh;
+    text-align: center;
+}
+
+#menuSection{
+    border: solid 1px red;
+    width: 20%;
+    
+}
+
+#menuSection section{
+    border: solid 1px red;
+    margin-bottom: 26rem;
+    display: flex;
+    background-color: #FD749B;
+    margin: .5rem 0;
+    border-radius: 0 10px 10px 0;
+    padding: .3rem;
+    margin:  1rem .5rem 1rem 0;
+}
+#menuSection form button{
+    border: none;
+    background-color: #fff;
+}
+
+
+#chatSection{
+    display: flex;
+    border: solid 1px green;
+    width: 80%;
+    margin: .5rem;
+}
+
+#chats{
+    border-right: 1px solid #F0F0F0;
+    width: 20%;
+}
+
+#sessionUser{
+    margin: .5rem;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+#chats form button{
+    margin-top: 15rem;
+}
+
+#openChat form{
+    border: 1px solid green;
+    display: block;
+    margin-top: 28rem;
+    width: 100%;
+}

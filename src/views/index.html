@@ -4,9 +4,71 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/aa9ea7d08e.js" crossorigin="anonymous"></script>
     <title>Chat</title>
 </head>
 <body>
-    <h1>INDEX</h1>
+    <header>
+        <form action="#" method="post">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            <input type="search" name="search" id="search" placeholder="User search">
+        </form>
+        <section>
+            <img src="#" alt="user image">
+            <p>User name</p>
+            <i class="fa-solid fa-bell"></i>
+        </section>
+    </header>
+
+    <main>
+       <section id="menuSection">
+           <section>
+                <i class="fa-solid fa-comments"></i>
+                <p>Chat</p>
+                <p>#</p>
+           </section>
+
+           <form action="#" method="post">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <button type="submit">Logout</button>
+           </form>
+       </section>
+
+       <section id="chatSection">
+           <section id="chats">
+              <div id="sessionUser">
+                    <img src="" alt="">
+                    <h1>Mi nombre</h1>
+                    <p>State</p>
+                </div>
+                <div class="users">
+                    <img src="" alt="">
+                    <h1>nombre</h1>
+                    <p>State</p>
+                    <p>N</p>
+                </div>
+                <div class="users">
+                    <img src="" alt="">
+                    <h1>nombre</h1>
+                    <p>State</p>
+                </div>
+                <form action="#" method="post">
+                    <button type="submit">New Chat</button>
+                </form>
+            </section> 
+
+            <section id="openChat">
+                <p>CONVERSACION (con horario de envio encima)</p>
+                <form action="#" method="post">
+                    <input type="text" name="message" id="message" placeholder="Start typing here">
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+        </section>
+        
+    </main>
+    
 </body>
 </html>
