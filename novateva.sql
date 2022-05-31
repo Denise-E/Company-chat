@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2022 at 07:00 PM
+-- Generation Time: May 31, 2022 at 02:45 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -40,7 +40,8 @@ CREATE TABLE `chat` (
 CREATE TABLE `complaint` (
   `id` int(11) NOT NULL,
   `description` text NOT NULL,
-  `file` text NOT NULL
+  `file` text NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -53,7 +54,9 @@ CREATE TABLE `message` (
   `id` int(11) NOT NULL,
   `message` text NOT NULL,
   `read` tinyint(1) NOT NULL,
-  `read_by` int(11) NOT NULL
+  `read_by` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,7 +70,8 @@ CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `phone` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `file` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -77,8 +81,9 @@ CREATE TABLE `user` (
 --
 
 CREATE TABLE `userchat` (
-  `chat_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -95,19 +100,30 @@ ALTER TABLE `chat`
 -- Indexes for table `complaint`
 --
 ALTER TABLE `complaint`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FOREIGN` (`user_id`);
 
 --
 -- Indexes for table `message`
 --
 ALTER TABLE `message`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FOREIGN` (`user_id`),
+  ADD KEY `FOREIGN_KEY` (`chat_id`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userchat`
+--
+ALTER TABLE `userchat`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `FOREIGN` (`chat_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -135,6 +151,12 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `userchat`
+--
+ALTER TABLE `userchat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 

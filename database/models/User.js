@@ -39,10 +39,14 @@ module.exports= (Sequelize,Datatypes) => {
   
     
     User.associate=function(models){
-      User.belongsTo(models.UserFile, {
-          as:"UserFile",
+      User.hasMany(models.Complaint, {
+          as:"Complaint",
           foreignKey:"user_id"
-      })
+      }),
+      User.hasMany(models.Message, {
+        as:"Message",
+        foreignKey:"user_id"
+    })
     }
   
   

@@ -13,6 +13,10 @@ module.exports= (Sequelize,Datatypes) => {
     file :{
         notNull:true,
         type: Datatypes.STRING,
+    },
+    user_id :{
+        notNull:true,
+        type: Datatypes.INTEGER,
     }
     
     }
@@ -25,7 +29,12 @@ module.exports= (Sequelize,Datatypes) => {
      
     const Complaint = Sequelize.define(alias,cols,config)
 
-  
+    Complaint.associate=function(models){
+        Complaint.belongsTo(models.User, {
+            as:"User",
+            foreignKey:"user_id"
+        })
+      }
   
     return Complaint
 }

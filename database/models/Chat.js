@@ -18,11 +18,11 @@ module.exports= (Sequelize,Datatypes) => {
   
     
     Chat.associate=function(models){
-      Chat.belongsTo(models.UserFile, {
-          as:"UserFile",
-          foreignKey:"chat_id"
-      })
-    }
+        Chat.hasMany(models.Message, {
+            as:"Message",
+            foreignKey:"chat_id"
+        })
+      }
   
   
     return Chat
