@@ -32,7 +32,6 @@ module.exports= (Sequelize,Datatypes) => {
     
      const config = {
          timestamps: true,
-         
      }
     
      
