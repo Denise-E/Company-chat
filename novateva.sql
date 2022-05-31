@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 06:59 PM
+-- Generation Time: May 31, 2022 at 07:51 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -24,51 +24,59 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chat`
+-- Table structure for table `chats`
 --
 
-CREATE TABLE `chat` (
-  `id` int(11) NOT NULL
+CREATE TABLE `chats` (
+  `id` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `complaint`
+-- Table structure for table `complaints`
 --
 
-CREATE TABLE `complaint` (
+CREATE TABLE `complaints` (
   `id` int(11) NOT NULL,
   `description` text NOT NULL,
   `file` text NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Table structure for table `messages`
 --
 
-CREATE TABLE `message` (
+CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
   `message` text NOT NULL,
   `read` tinyint(1) NOT NULL,
   `read_by` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `chat_id` int(11) NOT NULL
+  `chat_id` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `userchat`
+-- Table structure for table `userchats`
 --
 
-CREATE TABLE `userchat` (
+CREATE TABLE `userchats` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `chat_id` int(11) NOT NULL
+  `chat_id` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -82,7 +90,10 @@ CREATE TABLE `users` (
   `name` text NOT NULL,
   `phone` int(11) DEFAULT NULL,
   `email` text NOT NULL,
-  `file` text DEFAULT NULL
+  `file` text DEFAULT NULL,
+  `password` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -90,33 +101,31 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `chat`
+-- Indexes for table `chats`
 --
-ALTER TABLE `chat`
+ALTER TABLE `chats`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `complaint`
+-- Indexes for table `complaints`
 --
-ALTER TABLE `complaint`
+ALTER TABLE `complaints`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FOREIGN` (`user_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `message`
+-- Indexes for table `messages`
 --
-ALTER TABLE `message`
+ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FOREIGN` (`user_id`),
-  ADD KEY `FOREIGN_KEY` (`chat_id`);
+  ADD KEY `user_id` (`user_id`,`chat_id`);
 
 --
--- Indexes for table `userchat`
+-- Indexes for table `userchats`
 --
-ALTER TABLE `userchat`
+ALTER TABLE `userchats`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `FOREIGN` (`chat_id`);
+  ADD KEY `user_id` (`user_id`,`chat_id`);
 
 --
 -- Indexes for table `users`
@@ -129,34 +138,34 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `chat`
+-- AUTO_INCREMENT for table `chats`
 --
-ALTER TABLE `chat`
+ALTER TABLE `chats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `complaint`
+-- AUTO_INCREMENT for table `complaints`
 --
-ALTER TABLE `complaint`
+ALTER TABLE `complaints`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `message`
+-- AUTO_INCREMENT for table `messages`
 --
-ALTER TABLE `message`
+ALTER TABLE `messages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `userchat`
+-- AUTO_INCREMENT for table `userchats`
 --
-ALTER TABLE `userchat`
+ALTER TABLE `userchats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
