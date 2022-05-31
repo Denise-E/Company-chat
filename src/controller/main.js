@@ -1,7 +1,39 @@
 const path = require('path');
+const bcrypt = require('bcrypt');
+const sequelize = require("sequelize");
+const db = require('../../database/models');
 
 module.exports = {
     index: (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')),
     login: (req, res) => res.sendFile(path.resolve(__dirname, '../views/login.html')),
     register: (req, res) => res.sendFile(path.resolve(__dirname, '../views/register.html')),
+    save: (req,res) => {
+        db.User.findOne({where: {email: req.body.email}})
+        .then(exist => {
+            if (exist) {
+                return res.render("/register",{
+                 style: "register",
+                    errors:{
+                         email:{
+                             msg: "Este email ya está registrado",
+                         }
+                     }
+                 })
+            } else {
+
+                db.User.create({ 
+                    name: req.body.name,
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    password: bcrypt.hashSync(req.body.password, 10),
+                    file: req.body.file,
+                })
+                }})
+                .then(() => res.redirect("/login"))
+                .catch(err => res.send(err))
+                
+            },
+    access: (req,res) => {
+        
+    }
 }
