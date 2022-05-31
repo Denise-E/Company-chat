@@ -4,9 +4,11 @@ const sequelize = require("sequelize");
 const db = require('../../database/models');
 
 module.exports = {
-    index: (req, res) => res.sendFile(path.resolve(__dirname, '../views/index.html')),
-    login: (req, res) => res.sendFile(path.resolve(__dirname, '../views/login.html')),
-    register: (req, res) => res.sendFile(path.resolve(__dirname, '../views/register.html')),
+    index: (req, res) => res.render('index', {
+        
+    }),
+    login: (req, res) => res.render('login'),
+    register: (req, res) => res.render('register'),
     save: (req,res) => {
         db.User.findOne({where: {email: req.body.email}})
         .then(exist => {
