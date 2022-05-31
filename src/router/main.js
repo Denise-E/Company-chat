@@ -1,18 +1,20 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router();
-const main = require('../controller/main.js')
 const multer = require('multer');
 const upload = multer ({storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, path.resolve (__dirname, "../../uploads")),
     filename: (req, file, cb) => cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)),
 })});
 
-router.get('/', main.index);
-router.get('/login', main.login);
-router.get('/register', main.register);
+const {index, login, register, messages, save, access} = require('../controller/main.js')
 
-router.post("/save",[upload.single("file")], main.save);
-router.post("/access", main.access); 
+router.get('/', index);
+router.get('/login', login);
+router.get('/register', register);
+
+router.post('/', messages);
+router.post("/save",[upload.single("file")], save);
+router.post("/access", access); 
 
 module.exports = router;

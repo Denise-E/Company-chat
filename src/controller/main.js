@@ -32,7 +32,7 @@ module.exports = {
                 .then(() => res.redirect("/login"))
                 .catch(err => res.send(err))
                 
-            },
+    },
 
     access: (req,res) => {
         db.User.findOne({where: {email: req.body.email}})
@@ -62,5 +62,10 @@ module.exports = {
             return res.redirect ("/")
             }).catch(err => res.send(err))
         
+    },
+    messages: (req,res) => {
+        /* Necesito que al mandar mensaje se guarde en la base de datos :
+            Creo un Message - User id lo saco del input hiddenn, Y el chat como defino cuando crear uno y cuando no????
+        */
     }
 }

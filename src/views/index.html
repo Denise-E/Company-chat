@@ -66,7 +66,11 @@
             <section id="openChat">
 
                 <div id="messages"></div>
-                <form action="#" method="post" name="sendForm">
+                <form action="/" method="post" name="sendForm">
+                    <input type="hidden" name="id" id="id">
+                    <!-- 
+                        Hacer findAll en index, instalar y setear ejs en APP, cambiar html y cambiar controlador (render)
+                     -->
                     <input type="text" name="message" id="message" placeholder="Start typing here">
                     <input type="submit" value="Send"/>
                     <!--
