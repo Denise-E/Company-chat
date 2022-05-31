@@ -4,9 +4,13 @@ const sequelize = require("sequelize");
 const db = require('../../database/models');
 
 module.exports = {
-    index: (req, res) => res.render('index', {
-        
-    }),
+    index: (req, res) =>{ 
+        db.Product.findAll()
+        .then(result =>res.render('index', {
+            user: req.session.user ? req.session.user.id : null
+    }))
+    .catch(err => res.send(err))
+},
     login: (req, res) => res.render('login'),
     register: (req, res) => res.render('register'),
     save: (req,res) => {
@@ -60,7 +64,7 @@ module.exports = {
                     })
                 }
         
-            req.session.user= exist
+            req.session.user = exist
             return res.redirect ("/")
             }).catch(err => res.send(err))
         
