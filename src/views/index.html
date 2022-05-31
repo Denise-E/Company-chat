@@ -60,15 +60,50 @@
             </section> 
 
             <section id="openChat">
-                <p>CONVERSACION (con horario de envio encima)</p>
-                <form action="#" method="post">
+                
+                <div id="messages"></div>
+                <form action="#" method="post" name="sendForm">
                     <input type="text" name="message" id="message" placeholder="Start typing here">
-                    <button type="submit">Send</button>
+                    <input type="submit" value="Send"/>
+                    <!--
+                       <button type="submit" value="Send">Send</button> 
+                    -->
+                    
                 </form>
             </section>
         </section>
         
     </main>
-    
+    <script>
+        let url = location.host == 'localhost' ?
+        'ws://localhost:3000/ws' : location.host == 'javascript.local' ?
+        `ws://javascript.local/article/websocket/chat/ws` : // dev integration with local site
+        `wss://javascript.info/article/websocket/chat/ws`; // prod integration with javascript.info
+
+        let socket = new WebSocket(url);
+
+        // send message from the form
+    document.forms.sendForm.onsubmit = function() {
+    let outgoingMessage = this.message.value;
+
+    socket.send(outgoingMessage);
+    return false;
+    };
+
+    // handle incoming messages
+    socket.onmessage = function(e) {
+    let incomingMessage = e.data;
+    showMessage(incomingMessage);
+    };
+
+    socket.onclose = e => console.log(`Closed ${e.code}`);
+
+    // show message in div#messages
+    function showMessage(message) {
+    let messageElem = document.createElement('div');
+    messageElem.textContent = message;
+    document.getElementById('messages').prepend(messageElem);
+    }
+    </script>
 </body>
 </html>
