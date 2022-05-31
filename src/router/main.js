@@ -13,6 +13,6 @@ router.get('/login', main.login);
 router.get('/register', main.register);
 
 router.post("/save",[upload.single("file")], main.save);
-router.post("/access",main.access); 
+router.post("/access", main.access); 
 
 module.exports = router;

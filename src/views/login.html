@@ -9,7 +9,19 @@
 </head>
 <body>
     <main>
-        <h1>Pagina de inicio de sesion</h1>
+        <form action="/access" method="post" >            
+            <fieldset>
+                <h1 class="tituloLogin">Ingresá a tu cuenta</h1>
+                
+                <label for=""> Correo electrónico :</label>
+                <input type="email" name="email" id="email" required>
+                  
+                <label for="">Contraseña :</label>
+                <input type="password" name="password" id="password" required>
+    
+                <button type="submit">Iniciar sesión</button>
+            </fieldset>
+        </form>
     </main>
 </body>
 </html>

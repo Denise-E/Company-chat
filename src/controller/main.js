@@ -33,7 +33,34 @@ module.exports = {
                 .catch(err => res.send(err))
                 
             },
+
     access: (req,res) => {
+        db.User.findOne({where: {email: req.body.email}})
+            .then(exist => {
+                if (!exist) {
+                    return res.render("/login",{
+                    style: "login",
+                        errors:{
+                            email:{
+                                msg: "El email no existe",
+                            }
+                        }
+                    })
+                }
+                if (!bcrypt.compareSync(req.body.password, exist.password)) {
+                    return res.render("/login",{
+                    style: "login",
+                        errors:{
+                            password:{
+                                msg: "La contraseña es incorrecta",
+                            }
+                        }
+                    })
+                }
+        
+            req.session.user= exist
+            return res.redirect ("/")
+            }).catch(err => res.send(err))
         
     }
 }
