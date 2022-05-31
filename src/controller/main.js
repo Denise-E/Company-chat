@@ -73,5 +73,9 @@ module.exports = {
         /* Necesito que al mandar mensaje se guarde en la base de datos :
             Creo un Message - User id lo saco del input hiddenn, Y el chat como defino cuando crear uno y cuando no????
         */
+    },
+    logout: (req, res) => {
+        delete req.session.user
+        return res.redirect("/login")
     }
 }
