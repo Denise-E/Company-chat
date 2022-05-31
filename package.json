@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Denise-E/Company-chat#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "express-session": "^1.17.3",
     "mysql2": "^2.3.3",
     "sequelize": "^6.20.1",
     "ws": "^8.7.0"
