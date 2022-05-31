@@ -4,13 +4,7 @@ const sequelize = require("sequelize");
 const db = require('../../database/models');
 
 module.exports = {
-    index: (req, res) =>{ 
-        db.Product.findAll()
-        .then(result =>res.render('index', {
-            user: req.session.user ? req.session.user.id : null
-    }))
-    .catch(err => res.send(err))
-},
+    index: (req, res) =>res.render('index'),
     login: (req, res) => res.render('login'),
     register: (req, res) => res.render('register'),
     save: (req,res) => {
@@ -73,6 +67,7 @@ module.exports = {
         /* Necesito que al mandar mensaje se guarde en la base de datos :
             Creo un Message - User id lo saco del input hiddenn, Y el chat como defino cuando crear uno y cuando no????
         */
+            
     },
     logout: (req, res) => {
         delete req.session.user
