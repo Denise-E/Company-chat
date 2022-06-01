@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const session = require('express-session');
+const cookie = require("cookie-parser");
 
 app.set('port', process.env.PORT || 3000);
 app.set ("views", path.resolve (__dirname, "views"));
@@ -11,13 +12,15 @@ app.listen(app.get('port'), ()=> console.log('Listening on http://localhost:' + 
 
 app.use(express.static(path.resolve(__dirname, "../public")));
 app.use("/uploads",express.static(path.resolve(__dirname, "../uploads")));
+
+app.use(require("./middlewares/user"))
+
 app.use(express.urlencoded({extended:true}));
-
-app.use(require('./router/main'));
-
-
 app.use(session({
     secret: 'Secret!',
     resave: false,
     saveUninitialized: true
   }))
+  
+  
+  app.use(require('./router/main'));
