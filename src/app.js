@@ -20,7 +20,8 @@ app.use(session({
     secret: 'Secret!',
     resave: false,
     saveUninitialized: true
-  }))
+  }));
+  app.use(cookie());
   
   
   app.use(require('./router/main'));
