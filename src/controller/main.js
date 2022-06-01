@@ -2,6 +2,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const sequelize = require("sequelize");
 const db = require('../../database/models');
+const op = sequelize.Op;
 
 module.exports = {
     index: (req, res) =>res.render('index', {
@@ -80,5 +81,13 @@ module.exports = {
     logout: (req, res) => {
         delete req.session.user
         return res.redirect("/login")
-    }
+    },
+    search: (req, res) => {
+        db.User.findAll({
+            where: { name: { [op.like] : "%" + req.body.search + "%"}}
+        })
+        .then(results => {
+            res.send(results)
+            })
+        }
 }

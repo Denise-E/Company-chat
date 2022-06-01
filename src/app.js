@@ -10,6 +10,8 @@ app.set("view engine", "ejs");
 app.listen(app.get('port'), ()=> console.log('Listening on http://localhost:' + app.get('port')));
 
 app.use(express.static(path.resolve(__dirname, "../public")));
+app.use("/uploads",express.static(path.resolve(__dirname, "../uploads")));
+app.use(express.urlencoded({extended:true}));
 
 app.use(require('./router/main'));
 

@@ -7,7 +7,7 @@ const upload = multer ({storage: multer.diskStorage({
     filename: (req, file, cb) => cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)),
 })});
 
-const {index, login, register, messages, save, access, logout} = require('../controller/main.js')
+const {index, login, register, messages, save, access, logout, search} = require('../controller/main.js')
 
 router.get('/', index);
 router.get('/login', login);
@@ -17,5 +17,6 @@ router.post('/', messages);
 router.post("/save",[upload.single("file")], save);
 router.post("/access", access); 
 router.post("/logout", logout); 
+router.post('/search', search);
 
 module.exports = router;
