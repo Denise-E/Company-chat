@@ -30,7 +30,7 @@ module.exports = {
                     phone: req.body.phone,
                     email: req.body.email,
                     password: bcrypt.hashSync(req.body.password, 10),
-                    file: req.body.file,
+                    file: req.file ? req.file.filename : "default.png",
                 })
                 }})
                 .then(() => res.redirect("/login"))
