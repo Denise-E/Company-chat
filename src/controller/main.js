@@ -62,7 +62,11 @@ module.exports = {
                         }
                     })
                 }
-        
+                
+                if(req.body.remember){
+                    res.cookie("email",req.body.email,{maxAge:1000*60*60*24*365})
+                }
+
             req.session.user = exist
             //res.send(req.body)
             return res.redirect ("/")
