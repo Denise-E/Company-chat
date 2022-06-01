@@ -40,6 +40,7 @@ module.exports = {
 
     access: (req,res) => {
         db.User.findOne({where: {email: req.body.email}})
+        
             .then(exist => {
                 if (!exist) {
                     return res.render("/login",{
@@ -63,8 +64,9 @@ module.exports = {
                 }
         
             req.session.user = exist
+            //res.send(req.body)
             return res.redirect ("/")
-            }).catch(err => res.send(err))
+            }).catch(err => res.send(err)) 
         
     },
     messages: (req,res) => {
