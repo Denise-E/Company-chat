@@ -62,52 +62,25 @@
                 </form>
             </section> 
 
-            <section id="openChat">
+            <section id="card">
+                <div>
+                    <h4>Chat</h4>
+                </div>
+                <div id="chat"">
 
-                <div id="messages"></div>
-                <form action="/" method="post" name="sendForm"> 
+                </div>
+                <form action="/" method="post" name="sendForm" id="sendForm"> 
                     <input type="hidden" name="id" id="id" value='<%= user_id %> '>
                     <input type="text" name="message" id="message" placeholder="Start typing here">
-                    <input type="submit" value="SEND" id="sendMessage"/>
-                    <!--
-                       <button type="submit" value="Send">Send</button> 
-                    -->
+                       <button type="submit"}>Send</button> 
                     
                 </form>
             </section>
         </section>
         
     </main>
-    <script>
-        let url = location.host == 'localhost' ?
-        'ws://localhost:3000/ws' : location.host == 'javascript.local' ?
-        `ws://javascript.local/article/websocket/chat/ws` : // dev integration with local site
-        `wss://javascript.info/article/websocket/chat/ws`; // prod integration with javascript.info
-
-        let socket = new WebSocket(url);
-
-        // send message from the form
-    document.forms.sendForm.onsubmit = function() {
-    let outgoingMessage = this.message.value;
-
-    socket.send(outgoingMessage);
-    return false;
-    };
-
-    // handle incoming messages
-    socket.onmessage = function(e) {
-    let incomingMessage = e.data;
-    showMessage(incomingMessage);
-    };
-
-    socket.onclose = e => console.log(`Closed ${e.code}`);
-
-    // show message in div#messages
-    function showMessage(message) {
-    let messageElem = document.createElement('div');
-    messageElem.textContent = message;
-    document.getElementById('messages').prepend(messageElem);
-    }
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
